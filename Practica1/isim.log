@@ -1,0 +1,22 @@
+ISim log file
+Running: C:\XilinxP\Practica1\sumcomp4_test_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/XilinxP/Practica1/sumcomp4_test_isim_beh.wdb 
+ISim P.20131013 (signature 0x7708f090)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+...
+Finished circuit initialization process.
+x = 1011, y = 0101, z = 0000
+x = 1010, y = 1101, z = 0111
+x = 1111, y = 1110, z = 1101
+x = 1111, y = 1111, z = 1110
+x = 1000, y = 0100, z = 1100
+x = 1010, y = 0001, z = 1011
+x = 1111, y = 0000, z = 1111
+x = 0110, y = 1001, z = 1111

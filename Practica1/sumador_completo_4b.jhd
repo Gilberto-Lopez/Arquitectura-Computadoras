@@ -1,0 +1,9 @@
+MODULE sumador_completo_4b
+	SUBMODULE summed
+		INSTANCE XLXI_1
+	SUBMODULE sumcomp
+		INSTANCE XLXI_2
+	SUBMODULE sumcomp
+		INSTANCE XLXI_3
+	SUBMODULE sumcomp
+		INSTANCE XLXI_4
