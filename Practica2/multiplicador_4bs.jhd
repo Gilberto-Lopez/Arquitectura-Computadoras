@@ -1,0 +1,3 @@
+MODULE multiplicador_4bs
+	SUBMODULE mult4
+		INSTANCE XLXI_1

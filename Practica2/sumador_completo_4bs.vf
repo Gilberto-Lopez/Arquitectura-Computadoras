@@ -1,0 +1,183 @@
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+////////////////////////////////////////////////////////////////////////////////
+//   ____  ____ 
+//  /   /\/   / 
+// /___/  \  /    Vendor: Xilinx 
+// \   \   \/     Version : 14.7
+//  \   \         Application : sch2hdl
+//  /   /         Filename : sumador_completo_4bs.vf
+// /___/   /\     Timestamp : 03/23/2016 20:53:20
+// \   \  /  \ 
+//  \___\/\___\ 
+//
+//Command: C:\Xilinx\14.7\ISE_DS\ISE\bin\nt\unwrapped\sch2hdl.exe -intstyle ise -family spartan6 -verilog sumador_completo_4bs.vf -w C:/XilinxP/Practica2/sumador_completo_4bs.sch
+//Design Name: sumador_completo_4bs
+//Device: spartan6
+//Purpose:
+//    This verilog netlist is translated from an ECS schematic.It can be 
+//    synthesized and simulated, but it should not be modified. 
+//
+`timescale  100 ps / 10 ps
+
+module COMPM4_HXILINX_sumador_completo_4bs (GT, LT, A0, A1, A2, A3, B0, B1, B2, B3);
+    
+
+   output GT;
+   output LT;
+
+   input  A0;
+   input  A1;
+   input  A2;
+   input  A3;
+   input  B0;
+   input  B1;
+   input  B2;
+   input  B3;
+
+   assign GT = {A3, A2, A1, A0} > {B3, B2, B1, B0};
+   assign LT = {A3, A2, A1, A0} < {B3, B2, B1, B0}  ;
+
+endmodule
+`timescale 1ns / 1ps
+
+module sumador_completo_4bs(x0, 
+                            x1, 
+                            x2, 
+                            x3, 
+                            x4, 
+                            y0, 
+                            y1, 
+                            y2, 
+                            y3, 
+                            y4, 
+                            Co, 
+                            z0, 
+                            z1, 
+                            z2, 
+                            z3, 
+                            z4);
+
+    input x0;
+    input x1;
+    input x2;
+    input x3;
+    input x4;
+    input y0;
+    input y1;
+    input y2;
+    input y3;
+    input y4;
+   output Co;
+   output z0;
+   output z1;
+   output z2;
+   output z3;
+   output z4;
+   
+   wire XLXN_112;
+   wire XLXN_113;
+   wire XLXN_114;
+   wire XLXN_115;
+   wire XLXN_116;
+   wire XLXN_117;
+   wire XLXN_118;
+   wire XLXN_119;
+   wire XLXN_120;
+   wire XLXN_121;
+   wire XLXN_122;
+   wire XLXN_123;
+   wire XLXN_124;
+   wire XLXN_125;
+   wire XLXN_126;
+   wire XLXN_127;
+   wire XLXN_128;
+   wire XLXN_129;
+   wire XLXN_130;
+   wire XLXN_131;
+   wire XLXN_132;
+   wire XLXN_133;
+   
+   sumcomp  XLXI_23 (.ci(XLXN_121), 
+                    .xi(x3), 
+                    .yi(XLXN_130), 
+                    .Co(XLXN_133), 
+                    .Si(XLXN_122));
+   sumcomp  XLXI_24 (.ci(XLXN_120), 
+                    .xi(x2), 
+                    .yi(XLXN_129), 
+                    .Co(XLXN_121), 
+                    .Si(XLXN_123));
+   sumcomp  XLXI_25 (.ci(XLXN_119), 
+                    .xi(x1), 
+                    .yi(XLXN_128), 
+                    .Co(XLXN_120), 
+                    .Si(XLXN_124));
+   sumcomp  XLXI_26 (.ci(XLXN_131), 
+                    .xi(x0), 
+                    .yi(XLXN_127), 
+                    .Co(XLXN_119), 
+                    .Si(XLXN_125));
+   summed  XLXI_27 (.xi(XLXN_112), 
+                   .yi(XLXN_118), 
+                   .Co(), 
+                   .Si(z3));
+   summed  XLXI_28 (.xi(XLXN_113), 
+                   .yi(XLXN_117), 
+                   .Co(XLXN_118), 
+                   .Si(z2));
+   summed  XLXI_29 (.xi(XLXN_114), 
+                   .yi(XLXN_116), 
+                   .Co(XLXN_117), 
+                   .Si(z1));
+   summed  XLXI_30 (.xi(XLXN_115), 
+                   .yi(XLXN_126), 
+                   .Co(XLXN_116), 
+                   .Si(z0));
+   XOR2  XLXI_31 (.I0(XLXN_126), 
+                 .I1(XLXN_122), 
+                 .O(XLXN_112));
+   XOR2  XLXI_32 (.I0(XLXN_126), 
+                 .I1(XLXN_123), 
+                 .O(XLXN_113));
+   XOR2  XLXI_33 (.I0(XLXN_126), 
+                 .I1(XLXN_124), 
+                 .O(XLXN_114));
+   XOR2  XLXI_34 (.I0(XLXN_126), 
+                 .I1(XLXN_125), 
+                 .O(XLXN_115));
+   XOR2  XLXI_35 (.I0(XLXN_131), 
+                 .I1(y3), 
+                 .O(XLXN_130));
+   XOR2  XLXI_36 (.I0(XLXN_131), 
+                 .I1(y2), 
+                 .O(XLXN_129));
+   XOR2  XLXI_37 (.I0(XLXN_131), 
+                 .I1(y1), 
+                 .O(XLXN_128));
+   XOR2  XLXI_38 (.I0(XLXN_131), 
+                 .I1(y0), 
+                 .O(XLXN_127));
+   XOR2  XLXI_40 (.I0(y4), 
+                 .I1(x4), 
+                 .O(XLXN_131));
+   INV  XLXI_41 (.I(XLXN_131), 
+                .O(XLXN_132));
+   AND2  XLXI_42 (.I0(XLXN_133), 
+                 .I1(XLXN_132), 
+                 .O(Co));
+   XOR2  XLXI_44 (.I0(XLXN_126), 
+                 .I1(x4), 
+                 .O(z4));
+   (* HU_SET = "XLXI_45_0" *) 
+   COMPM4_HXILINX_sumador_completo_4bs  XLXI_45 (.A0(x0), 
+                                                .A1(x1), 
+                                                .A2(x2), 
+                                                .A3(x3), 
+                                                .B0(y0), 
+                                                .B1(y1), 
+                                                .B2(y2), 
+                                                .B3(y3), 
+                                                .GT(), 
+                                                .LT(XLXN_126));
+endmodule

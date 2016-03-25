@@ -1,0 +1,1 @@
+sch2hdl -intstyle ise -family spartan6 -verilog sumador_completo_4bs.vf -w C:/XilinxP/Practica2/sumador_completo_4bs.sch 
