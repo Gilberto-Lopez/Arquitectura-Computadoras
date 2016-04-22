@@ -1,0 +1,38 @@
+ISim log file
+Running: C:\XilinxP\Practica3\TestALU_isim_beh.exe -intstyle ise -gui -tclbatch isim.cmd -wdb C:/XilinxP/Practica3/TestALU_isim_beh.wdb 
+ISim P.20131013 (signature 0x7708f090)
+WARNING: A WEBPACK license was found.
+WARNING: Please use Xilinx License Configuration Manager to check out a full ISim license.
+WARNING: ISim will run in Lite mode. Please refer to the ISim documentation for more information on the differences between the Lite and the Full version.
+This is a Lite version of ISim.
+Time resolution is 1 ps
+# onerror resume
+# wave add /
+# run 1000 ns
+Simulator is doing circuit initialization process.
+Finished circuit initialization process.
+Suma.
+Z = 0 000000000000000000001.1000000000, ovf = 0
+Z = 1 000011101000110101110.1101000111, ovf = 1
+Z = 1 000011011001100111110.0010000101, ovf = 0
+Resta.
+Z = 1 000000000000000000000.1000000000, ovf = 0
+Z = 0 000000000000000000000.0000000000, ovf = 0
+Z = 0 000000000001101000101.0000000000, ovf = 0
+Multiplicacion.
+Z = 0 000000000000000000001.0000000000, ovf = 0
+Z = 0 000000000000000001000.1011000000, ovf = 0
+Z = 0 000000010111111111011.0101001101, ovf = 0
+Comparaciones
+a = 0 0.0000000000, b = 1 0.0000000000, lt = 0, gt = 0, eq = 1
+a = 0 0.1000000000, b = 0 0.0000000000, lt = 0, gt = 1, eq = 0
+a = 0 1010011000111110110.1111000111, b = 1 110111111010111000.1101000010, lt = 0, gt = 1, eq = 0
+AND
+Z = 00001010011001000100010000000000, ovf = 0
+Z = 00000000000000000000000000000000, ovf = 0
+Z = 10010110100101100101101011010111, ovf = 0
+OR
+Z = 01111010011001100110110010011111, ovf = 0
+Z = 11111111111111111111111111111111, ovf = 0
+Z = 10010110100101100101101011010111, ovf = 0
+NOT a
