@@ -40,11 +40,14 @@ module Divisor(
 				else q = q << 1;
 				divisor = divisor >> 1;
 			end
+			
+			//!!!
 			if(i < 10) begin
 				q = q << (11 - i);
 			end else begin
 				q = q >> (i - 11);
 			end
+			//!!!
 			Z[30:0] = q[30:0];
 			Z[31] = a[31] ^ b[31];
 			ovf = q[31];
