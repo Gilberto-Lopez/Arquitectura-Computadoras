@@ -1,0 +1,301 @@
+\documentclass[12pt]{article}
+\usepackage{listings}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amssymb}
+\usepackage[fleqn]{amsmath}
+
+\title{Organización y Arquitectura de Computadoras\\
+  Práctica 4: Lógica de transferencia de registros.}
+\author{Gilberto Isaac López García\\
+  Número de cuenta:\\
+  Correo: gilisaac@ciencias.unam.mx}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\abstract{Diseño de la lógica de transferencia de registros del conjunto de instrucciones de la arquitectura del proyecto final. Las instrucciones ocupan palabaras de 32 bits y cada instrucción tiene especificada su código de operación, los operandos y su posición dentro de la palabra de memoria.}
+
+\section*{Instrucciones}
+
+\begin{enumerate}
+\item
+  \begin{flalign*}
+    &Nop \ (NOP) \ (\varnothing)\\
+    &Op. \ Code \ (00000): 31-27\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{NOP} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Suma \ (SUM) \ (R[IR[C]] = R[IR[A]] + R[IR[B]])\\
+    &Op. \ Code \ (00001): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{SUM} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{SUM} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{SUM} : ALU_C \leftarrow ALU_A + ALU_B\\
+    &t_6,q_{SUM} : R[IR[C]] \leftarrow ALU_C\\
+    &t_7,q_{SUM} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Resta \ (SUS) \ (R[IR[C]] = R[IR[A]] - R[IR[B]])\\
+    &Op. \ Code \ (00010): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{SUS} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{SUS} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{SUS} : ALU_C \leftarrow ALU_A - ALU_B\\
+    &t_6,q_{SUS} : R[IR[C]] \leftarrow ALU_C\\
+    &t_7,q_{SUS} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Multiplicación \ (MUL) \ (R[IR[C]] = R[IR[A]] * R[IR[B]])\\
+    &Op. \ Code \ (00011): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{MUL} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{MUL} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{MUL} : ALU_C \leftarrow ALU_A * ALU_B\\
+    &t_6,q_{MUL} : R[IR[C]] \leftarrow ALU_C\\
+    &t_7,q_{MUL} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &División \ (DIV) \ (R[IR[C]] = R[IR[A]] / R[IR[B]])\\
+    &Op. \ Code \ (00100): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{DIV} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{DIV} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{DIV} : ALU_C \leftarrow ALU_A / ALU_B\\
+    &t_6,q_{DIV} : R[IR[C]] \leftarrow ALU_C\\
+    &t_7,q_{DIV} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &And \ (AND) \ (R[IR[C]] = R[IR[A]] \& R[IR[B]])\\
+    &Op. \ Code \ (00101): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{AND} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{AND} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{AND} : ALU_C \leftarrow ALU_A \& ALU_B\\
+    &t_6,q_{AND} : R[IR[C]] \leftarrow ALU_C\\
+    &t_7,q_{AND} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Or \ (OR) \ (R[IR[C]] = R[IR[A]] | R[IR[B]])\\
+    &Op. \ Code \ (00110): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{OR} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{OR} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{OR} : ALU_C \leftarrow ALU_A | ALU_B\\
+    &t_6,q_{OR} : R[IR[C]] \leftarrow ALU_C\\
+    &t_7,q_{OR} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Not \ (NOT) \ (R[IR[C]] = \overline{R[IR[A]]})\\
+    &Op. \ Code \ (00111): 31-27\\
+    &A: 26-23\\
+    &C: 22-19\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{NOT} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{NOT} : ALU_C \leftarrow \overline{ALU_A}\\
+    &t_5,q_{NOT} : R[IR[C]] \leftarrow ALU_C\\
+    &t_6,q_{NOT} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Menor \ que \ (LE) \ (R[IR[A]] < R[IR[B]])\\
+    &Op. \ Code \ (01000): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{LE} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{LE} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{LE},ALU_{LE} : R[IR[C]] \leftarrow 1\\
+    &t_5,q_{LE},\overline{ALU_{LE}} : R[IR[C]] \leftarrow \varnothing\\
+    &t_6,q_{LE} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Igual \ que \ (EQ) \ (R[IR[A]] == R[IR[B]])\\
+    &Op. \ Code \ (01001): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{EQ} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{EQ} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{EQ},ALU_{EQ} : R[IR[C]] \leftarrow 1\\
+    &t_5,q_{EQ},\overline{ALU_{EQ}} : R[IR[C]] \leftarrow \varnothing\\
+    &t_6,q_{EQ} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Mayor \ que \ (GT) \ (R[IR[A]] > R[IR[B]])\\
+    &Op. \ Code \ (01010): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &C: 18-15\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{GT} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{GT} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{GT},ALU_{GT} : R[IR[C]] \leftarrow 1\\
+    &t_5,q_{GT},\overline{ALU_{GT}} : R[IR[C]] \leftarrow \varnothing\\
+    &t_6,q_{GT} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Load \ word \ (LW) \ (R[IR[A]] = M[ADD])\\
+    &Op. \ Code \ (01011): 31-27\\
+    &A: 26-23\\
+    &ADD: 22-13\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{LW} : MAR \leftarrow IR[ADD]\\
+    &t_4,q_{LW} : MBR \leftarrow M\\
+    &t_5,q_{LW} : R[IR[A]] \leftarrow MBR\\
+    &t_6,q_{LW} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Store \ word \ (SW) \ (M[ADD] = R[IR[A]])\\
+    &Op. \ Code \ (01100): 31-27\\
+    &A: 26-23\\
+    &ADD: 22-13\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{SW} : MAR \leftarrow IR[ADD]\\
+    &t_4,q_{SW} : MBR \leftarrow R[IR[A]]\\
+    &t_5,q_{SW} : M \leftarrow MBR\\
+    &t_6,q_{SW} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Jump \ (J) \ (Siguiente \ instrucción \ es \ M[ADD])\\
+    &Op. \ Code \ (01101): 31-27\\
+    &ADD: 26-17\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{J} : PC \leftarrow IR[ADD]\\
+    &t_4,q_{J} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Branch \ on \ equal \ (BEQ) \ (Si \ R[IR[A]] == R[IR[B]],\\
+    &la \ siguiente \ instrucción \ es \ M[ADD])\\
+    &Op. \ Code \ (01110): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &ADD: 18-9\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{BEQ} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{BEQ} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{BEQ},ALU_{EQ} : PC \leftarrow IR[ADD]\\
+    &t_5,q_{BEQ},\overline{ALU_{EQ}} : t \leftarrow \varnothing\\
+    &t_6,q_{BGT} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Branch \ on \ less \ (BLE) \ (Si \ R[IR[A]] < R[IR[B]],\\
+    &la \ siguiente \ instrucción \ es \ M[ADD])\\
+    &Op. \ Code \ (01111): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &ADD: 18-9\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{BLE} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{BLE} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{BLE},ALU_{LE} : PC \leftarrow IR[ADD]\\
+    &t_5,q_{BLE},\overline{ALU_{LE}} : t \leftarrow \varnothing\\
+    &t_6,q_{BGT} : t \leftarrow \varnothing
+  \end{flalign*}
+\item
+  \begin{flalign*}
+    &Branch \ on \ greater \ (BGT) \ (Si \ R[IR[A]] > R[IR[B]],\\
+    &la \ siguiente \ instrucción \ es \ M[ADD])\\
+    &Op. \ Code \ (10000): 31-27\\
+    &A: 26-23\\
+    &B: 22-19\\
+    &ADD: 18-9\\
+    &LTR:\\
+    &t_0 : MAR \leftarrow PC\\
+    &t_1 : MBR \leftarrow M, PC \leftarrow PC + 1\\
+    &t_2 : IR \leftarrow MBR\\
+    &t_3,q_{BGT} : ALU_A \leftarrow R[IR[A]]\\
+    &t_4,q_{BGT} : ALU_B \leftarrow R[IR[B]]\\
+    &t_5,q_{BGT},ALU_{GT} : PC \leftarrow IR[ADD]\\
+    &t_5,q_{BGT},\overline{ALU_{GT}} : t \leftarrow \varnothing\\
+    &t_6,q_{BGT} : t \leftarrow \varnothing
+  \end{flalign*}
+
+\end{enumerate}
+
+\end{document}
