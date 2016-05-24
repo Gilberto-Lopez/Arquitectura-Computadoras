@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage{listings}
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amssymb}
+\usepackage[fleqn]{amsmath}
+\usepackage{program}
+
+\title{Organización y Arquitectura\\
+  de Computadoras\\
+  Práctica 5: Arquitectura final.}
+\author{Gilberto Isaac López García\\
+  Número de cuenta:\\
+  Correo: gilisaac@ciencias.unam.mx}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\abstract{La práctica es una arquitectua completa que consta de una ALU, una memoria y una unidad de control diseñadas en \texttt{Verilog} con un programa cargado en memoria que calcula la integral del polinomio $3x^2-2x-2$ en el intervalo $[-2,2]$.}
+
+\section*{Arquitectura}
+
+La arquitectua consta de una ALU con todas las operaciones de la práctica 3, la unidad de control con las instrucciones de la práctica 4 y una memoria de 1024 registros de palabras de 32 bits.
+
+La memoria tiene cargada un programa para aproximar la integral del polinomio $f(x) = 3x^2-2x-2$ en el intervalo $[-2,2]$, mediante sumas de Riemann.
+
+La integral se aproxima como:
+
+$$\int_{-2}^{2} f(x) dx \approx \sum_{n = 0}^{k} f(-2+n\Delta)\Delta$$
+
+donde $\Delta = 0.001$ y $k = 4/0.001 -1$.
+
+El programa es el siguiente:
+
+\begin{program}
+  \BEGIN \\ %
+    a = 3;
+    b = -2;
+    c = -2; %
+    \rcomment{Los coeficientes del polinomio.}
+    d = -2;
+    e = 2; %
+    \rcomment{Los límites del intervalo de integración.}
+    \Delta = 0.001; %
+    \rcomment{El tamaño de la partición del intervalo.}
+    m = d;
+    s = 0;
+    \WHILE m < e \DO
+    x = a*m^2 + b*m + c;
+    s\ += x;
+    m\ += \Delta;
+  \END
+  s\ *= \Delta;
+  |return|\ s;
+\END
+\end{program}
+
+El prgrama en memoria se ve así:
+
+\begin{center}
+  \begin{tabular}{ l  l  r }
+    Dirección & Instrucción/Dato & Binario \\ \hline
+    0 & J 8 & 0x68100000\\
+    1 & 3 & 0xC00\\
+    2 & -2 & 0x80000800\\
+    3 & -2 & 0x80000800\\
+    4 & -2 & 0x80000800\\
+    5 & 2 & 0x800\\
+    6 & 0.001 & 0x1\\
+    7 & 0 & 0x0\\
+    8 & LW 2 1 & 0x59002000\\
+    9 & LW 3 2 & 0x59804000\\
+    10 & LW 4 3 & 0x5A006000\\
+    11 & LW 5 4 & 0x5A808000\\
+    12 & LW 6 5 & 0x5B00A000\\
+    13 & LW 7 6 & 0x5B80C000\\
+    14 & BLE 5 6 18 & 0x7AB02400\\
+    15 & MUL 11 7 11& 0x1DBD8000\\
+    16 & SW 11 7 & 0x6580E000\\
+    17 & J 26 & 0x68340000\\
+    18 & MUL 5 5 8 & 0x1AAC0000\\
+    19 & MUL 2 8 8 & 0x19440000\\
+    20 & MUL 3 5 9 & 0x19AC8000\\
+    21 & SUM 8 9 10 & 0xC4D0000\\
+    22 & SUM 10 4 10 & 0xD250000\\
+    23 & SUM 11 10 11 & 0xDD58000\\
+    24 & SUM 5 7 5 & 0xABA8000\\
+    25 & J 14 & 0x681C0000\\
+    26 & & \\
+  \end{tabular}
+\end{center}
+
+\end{document}
