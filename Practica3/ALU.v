@@ -15,8 +15,9 @@ module ALU(
 	output reg eq,
 	output reg gt,
 	output reg ovf
-	);
+);
 
+	//Operations
 	localparam SUMA = 4'd0;
 	localparam RESTA = 4'd1;
 	localparam MULT = 4'd2;
@@ -40,6 +41,7 @@ module ALU(
 	wire greater;
 	wire equal;
 	
+	//Modules
 	Comparador comp(
 		.a(a),
 		.b(b),

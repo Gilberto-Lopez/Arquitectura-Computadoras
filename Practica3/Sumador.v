@@ -13,7 +13,7 @@ module Sumador(
 	output reg ovf
 	);
 
-	//Initialize
+	//Inicializar
 	reg [31:0] a32 = 32'b0;
 	reg [31:0] b32 = 32'b0;
 	reg [31:0] ab = 32'b0;

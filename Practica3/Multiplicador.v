@@ -13,7 +13,7 @@ module Multiplicador(
 	output reg ovf
 	);
 
-	//Initialize
+	//Inicializar
 	reg [63:0] a64 = 64'b0;
 	reg [63:0] b64 = 64'b0;
 	reg [63:0] ab = 64'b0;
